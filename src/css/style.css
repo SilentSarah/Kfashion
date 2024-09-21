@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: "PS3";
+    src: local("ps3"), url("../fonts/ps3/ps3-normal.TTF") format("truetype");
+    font-weight: medium;
+}
+
+body {
+    background-color: #000000;
+    box-sizing: border-box;
+    font-family: 'PS3';
+    width: 100svw;
+    height: 100svh;
+}   
+
+.glow_img {
+    filter: drop-shadow(0 0 20px  #ffffff);
+}
