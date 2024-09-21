@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion'
 import '../css/style.css'
+import { useEffect, useRef } from 'react'
+import { audio } from 'framer-motion/client'
 
 function MainPage() {
     const initialBgParams = {
@@ -13,7 +15,6 @@ function MainPage() {
         transition: { duration: 3.5 },
         animationTimingFunction: 'cubic-bezier(0.15, 0.85, 0.35, 1.2)'
     }
-
 
     const headerInitial = {
         opacity: 0,
@@ -37,6 +38,10 @@ function MainPage() {
         transition: { duration: 2, delay: 2.25 },
     }
 
+    useEffect(() => {
+      const audio = new Audio('/ps3-wave.mp3')
+      audio.play();
+    }, []);
   return (
     <motion.div
       initial={initialBgParams}
@@ -46,12 +51,12 @@ function MainPage() {
         initial={headerInitial}
         animate={headerParams}
         className='w-full text-white flex items-center relative z-10 '>
-        <img className='md:ms-auto md:me-10 ms-0 glow_img' src='/logo.png'/>
+        <img className='md:ms-auto md:me-10 mx-auto glow_img' src='/logo.png'/>
       </motion.h1>
       <motion.video
         initial={videoInitial}
         animate={videoParams}
-        loop autoPlay muted className='absolute -z-1'>
+        loop autoPlay muted className='absolute -z-1 object-none w-full h-full'>
         <source src='/ps3-wave.mp4' type='video/mp4'/>
       </motion.video>
     </motion.div>
