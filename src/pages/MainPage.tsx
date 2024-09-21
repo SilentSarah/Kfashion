@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import '../css/style.css'
-import { useEffect, useRef } from 'react'
-import { audio } from 'framer-motion/client'
+import { useEffect, useState, useRef } from 'react'
+import Startup from './components/Startup'
 
 function MainPage() {
     const initialBgParams = {
@@ -37,29 +37,42 @@ function MainPage() {
         filter: 'blur(0px), brightness(1)',
         transition: { duration: 2, delay: 2.25 },
     }
+    const [turnedON, setTurnedON] = useState(false);
+    const audioRef = useRef<HTMLAudioElement>(new Audio('/startup.mp3'));
 
     useEffect(() => {
-      const audio = new Audio('/ps3-wave.mp3')
-      audio.play();
-    }, []);
+        if (turnedON) {
+            audioRef.current?.play();
+            console.log('playing audio');
+        } else {
+            console.log('pausing audio');
+        }
+    }, [turnedON])
+
+
   return (
-    <motion.div
+    <div>
+    { turnedON ? (<motion.div
       initial={initialBgParams}
       animate={animateBgParams}
       className='h-screen w-screen flex items-center overflow-hidden relative'>
       <motion.h1 
-        initial={headerInitial}
-        animate={headerParams}
-        className='w-full text-white flex items-center relative z-10 '>
-        <img className='md:ms-auto md:me-10 mx-auto glow_img' src='/logo.png'/>
+            initial={headerInitial}
+            animate={headerParams}
+            className='w-full text-white flex items-center relative z-10 '>
+            <img className='md:ms-auto md:me-10 mx-auto glow_img' src='/logo.png'/>
       </motion.h1>
       <motion.video
-        initial={videoInitial}
-        animate={videoParams}
-        loop autoPlay muted className='absolute -z-1 object-none w-full h-full'>
-        <source src='/ps3-wave.mp4' type='video/mp4'/>
+            initial={videoInitial}
+            animate={videoParams}
+            loop autoPlay muted className='absolute -z-1 object-none w-full h-full'>
+            <source src='/ps3-wave.mp4' type='video/mp4'/>
       </motion.video>
-    </motion.div>
+      <audio src='/ps3-wave.mp3' className='hidden'></audio>
+    </motion.div>) : (
+        <Startup setTurnedON={setTurnedON} turnedON={turnedON}/>
+    )}
+    </div>
   )
 }
 

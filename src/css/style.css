@@ -19,3 +19,11 @@ body {
 .glow_img {
     filter: drop-shadow(0 0 20px  #ffffff);
 }
+
+progress::-moz-progress-bar {
+    background-color: #ffffff;
+}
+
+progress::-webkit-progress-bar {
+    background-color: #ffffff;
+}
