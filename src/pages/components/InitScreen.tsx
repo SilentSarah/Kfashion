@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { useContext } from "react";
 import { XmbContext } from "../MainPage";
 import Warning from "./Warning";
+import StartupLogo from "./StartupLogo";
+import XMB from "./XMB";
 
 export default function InitScreen() {
     const initialBgParams = {
@@ -14,17 +16,6 @@ export default function InitScreen() {
         filter: 'blur(0px), brightness(1)',
         transition: { duration: 3.5 },
         animationTimingFunction: 'cubic-bezier(0.15, 0.85, 0.35, 1.2)'
-    }
-
-    const headerInitial = {
-        opacity: 0,
-        filter: 'blur(2px), brightness(0.3)'
-    }
-
-    const headerParams = {
-        opacity: 1,
-        filter: 'blur(0px), brightness(1)',
-        transition: { duration: 2, delay: 1.5 },
     }
 
     const videoInitial = {
@@ -41,25 +32,16 @@ export default function InitScreen() {
     const context = useContext(XmbContext);
     if (!context) return null;
 
-    const { warning, setWarning } = context;
+    const { warning, accepted_warning } = context;
 
     return (
         <motion.div
             initial={initialBgParams}
             animate={animateBgParams}
             className='h-screen w-screen flex items-center overflow-hidden relative'>
-            { 
-                warning ?
-                (<Warning />)
-                :
-                (<motion.h1
-                    initial={headerInitial}
-                    animate={headerParams}
-                    className='w-full text-white flex items-center relative z-10 '>
-                    <img className='md:ms-auto md:me-10 mx-auto glow_img' src='/logo.png' />
-                </motion.h1>)
-            
-            }
+            { warning && accepted_warning && <XMB />}
+            { warning && !accepted_warning && <Warning /> }
+            { !warning && !accepted_warning && <StartupLogo /> }
             <motion.video
                 initial={videoInitial}
                 animate={videoParams}

@@ -5,7 +5,8 @@ import InitScreen from './components/InitScreen';
 
 interface XmbContextProps {
     warning: boolean,
-    setWarning: React.Dispatch<React.SetStateAction<boolean>>;
+    accepted_warning: boolean,
+    setAccepted_warning: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const XmbContext = createContext<XmbContextProps | undefined>(undefined);
@@ -13,6 +14,7 @@ export const XmbContext = createContext<XmbContextProps | undefined>(undefined);
 function MainPage() {
     const [turnedON, setTurnedON] = useState<boolean>(false);
     const [warning, setWarning] = useState<boolean>(false);
+    const [accepted_warning, setAccepted_warning] = useState<boolean>(false);
     const audioRef = useRef<HTMLAudioElement>(new Audio('/startup.mp3'));
 
     useEffect(() => {
@@ -26,7 +28,7 @@ function MainPage() {
 
 
     return (
-        <XmbContext.Provider value={{warning, setWarning}}>
+        <XmbContext.Provider value={{warning, accepted_warning, setAccepted_warning}}>
             <div className='select-none'>
                 { turnedON ? <InitScreen/> : <Startup setTurnedON={setTurnedON} turnedON={turnedON}/>}
             </div>
