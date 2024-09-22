@@ -12,6 +12,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <MainPage />,
   },
+  {
+    path: "/xmb",
+    element: <div>About</div>,
+  }
 ]);
 
 createRoot(document.getElementById('root')!).render(

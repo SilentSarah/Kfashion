@@ -1,4 +1,7 @@
 import { motion } from "framer-motion";
+import { useContext } from "react";
+import { XmbContext } from "../MainPage";
+import Warning from "./Warning";
 
 export default function InitScreen() {
     const initialBgParams = {
@@ -34,24 +37,36 @@ export default function InitScreen() {
         filter: 'blur(0px), brightness(1)',
         transition: { duration: 2, delay: 2.25 },
     }
+
+    const context = useContext(XmbContext);
+    if (!context) return null;
+
+    const { warning, setWarning } = context;
+
     return (
         <motion.div
-          initial={initialBgParams}
-          animate={animateBgParams}
-          className='h-screen w-screen flex items-center overflow-hidden relative'>
-          <motion.h1 
-                initial={headerInitial}
-                animate={headerParams}
-                className='w-full text-white flex items-center relative z-10 '>
-                <img className='md:ms-auto md:me-10 mx-auto glow_img' src='/logo.png'/>
-          </motion.h1>
-          <motion.video
+            initial={initialBgParams}
+            animate={animateBgParams}
+            className='h-screen w-screen flex items-center overflow-hidden relative'>
+            { 
+                warning ?
+                (<Warning />)
+                :
+                (<motion.h1
+                    initial={headerInitial}
+                    animate={headerParams}
+                    className='w-full text-white flex items-center relative z-10 '>
+                    <img className='md:ms-auto md:me-10 mx-auto glow_img' src='/logo.png' />
+                </motion.h1>)
+            
+            }
+            <motion.video
                 initial={videoInitial}
                 animate={videoParams}
                 loop autoPlay muted className='absolute -z-1 object-none w-full h-full'>
-                <source src='/ps3-wave.mp4' type='video/mp4'/>
-          </motion.video>
-          <audio src='/ps3-wave.mp3' className='hidden'></audio>
+                <source src='/ps3-wave.mp4' type='video/mp4' />
+            </motion.video>
+            <audio src='/ps3-wave.mp3' className='hidden'></audio>
         </motion.div>)
-    
+
 }
