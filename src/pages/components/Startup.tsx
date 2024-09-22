@@ -19,6 +19,7 @@ export default function Startup(props: any) {
     const [right_prog, setprogr] = useState(0);
     const progTimer = useRef(0);
     const btnref = useRef<HTMLImageElement>(null);
+    const p_on_snd = useRef<HTMLAudioElement>(new Audio('/poweron.mp3'));
 
     useEffect(() => {
 
@@ -31,6 +32,7 @@ export default function Startup(props: any) {
     }, [left_prog, right_prog]);
 
     const startProgress = () => {
+        p_on_snd.current?.play();
         if (progTimer.current) {
             clearInterval(progTimer.current);
         }
@@ -53,7 +55,7 @@ export default function Startup(props: any) {
                 <img
                     ref={btnref}
                     onClick={() => {
-                        btnref.current?.classList.replace('brightness-50', 'brightness-100');
+                        btnref.current?.classList.add('glow_img');
                         startProgress();
                     }}
                     src='/power-off.png' width={64} height={64} className='cursor-pointer'></img>
@@ -62,6 +64,14 @@ export default function Startup(props: any) {
                     animate={{ width: '50%', transition: { duration: 1, delay: 1.25, ease: 'easeInOut' } }}
                     className='w-1/2 h-1 text-white' value={right_prog} max='100'></motion.progress>
             </div>
+            <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1, transition: { duration: 1, delay: 2.5 } }}
+                className='absolute w-full flex flex-col items-center gap-3 text-center h-full -z-10'>
+                <img className="mt-12 mb-auto" src="/favicon.svg" width={128}/>
+                <h1 className='text-white'>Best experienced with Full Screen Mode ON</h1>
+                <img className="mb-12" src="/scalability.png" width={42} height={42}/>
+            </motion.div>
         </motion.div>
     )
 }

@@ -21,9 +21,17 @@ body {
 }
 
 progress::-moz-progress-bar {
-    background-color: #ffffff;
+    background-color: #dddddd;
 }
 
 progress::-webkit-progress-bar {
-    background-color: #ffffff;
+    background-color: #8b8b8b;
+}
+
+progress[value]::-webkit-progress-value {
+    background-color: white;
+}
+
+progress[value]::-moz-progress-bar {
+    background-color: white;
 }
