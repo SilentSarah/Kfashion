@@ -2,6 +2,7 @@ import '../css/style.css'
 import { useEffect, useState, useRef, createContext } from 'react'
 import Startup from './components/Startup'
 import InitScreen from './components/InitScreen';
+import XMB from './components/XMB';
 
 interface XmbContextProps {
     warning: boolean,
@@ -29,8 +30,9 @@ function MainPage() {
 
     return (
         <XmbContext.Provider value={{warning, accepted_warning, setAccepted_warning}}>
-            <div className='select-none'>
-                { turnedON ? <InitScreen/> : <Startup setTurnedON={setTurnedON} turnedON={turnedON}/>}
+            <div className='select-none overflow-hidden h-screen'>
+                {/* { turnedON ? <InitScreen/> : <Startup setTurnedON={setTurnedON} turnedON={turnedON}/>} */}
+                <XMB/>
             </div>
         </XmbContext.Provider>
     )

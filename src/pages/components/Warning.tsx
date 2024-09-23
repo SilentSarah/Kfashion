@@ -43,7 +43,6 @@ export default function Warning() {
                     <br />
                     SONY INTERACTIVE ENTERTAINMENT OWNS THE RIGHTS TO THE XMB UI, PLAYSTATION AND ALL RELATED TRADEMARKS.
                     <br />
-                
                     THIS WEBSITE IS NOT AFFILIATED WITH SONY INTERACTIVE ENTERTAINMENT IN ANY WAY.
                 </p>
                 <p className='text-white p-2 rounded-md mb-12 text-center'>
